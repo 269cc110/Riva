@@ -25,7 +25,7 @@ void kernel::init()
 void kernel::start()
 {
 	vga::putstr("Riva 0.1\n> ");
-	fatal("test");
+//	fatal("test");
 }
 
 void kernel::fatal(const char *error)
@@ -39,16 +39,4 @@ void kernel::fatal(const char *error)
 	// TODO print registers
 
 	asm volatile("cli//hlt");
-}
-
-size_t strlen(const char *str)
-{
-	size_t result = 0;
-
-	while(*(str++))
-	{
-		result++;
-	}
-
-	return result;
 }
