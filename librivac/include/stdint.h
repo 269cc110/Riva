@@ -1,6 +1,11 @@
 #ifndef __LIBRIVAC_STDINT_H_
 #define __LIBRIVAC_STDINT_H_
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 typedef signed char int8_t;
 typedef short int int16_t;
 typedef int int32_t;
@@ -36,5 +41,9 @@ typedef unsigned long long uint_fast64_t;
 // pointers
 typedef int intptr_t;
 typedef unsigned int uintptr_t;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // __LIBRIVAC_STDINT_H_
