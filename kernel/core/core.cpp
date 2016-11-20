@@ -76,7 +76,7 @@ void kernel::start()
 //	char *stack_size_buffer = itoa(stack_size, stack_size_buffer0, 10);
 
 	vga::putstr(buffer);
-	vga::putstr("B stack");
+	vga::putstr(" byte stack");
 
 	vga::putstr(")\n");
 
