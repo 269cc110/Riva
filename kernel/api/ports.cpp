@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-#include <api/ports.h>
+#include <riva/api/ports.h>
 
 uint8_t riva::inportb(uint16_t port)
 {

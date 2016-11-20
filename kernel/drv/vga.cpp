@@ -1,8 +1,8 @@
 #include <string.h>
 
-#include <kernel/kernel.h>
-#include <kernel/drv/vga.h>
-#include <api/ports.h>
+#include <riva/kernel/kernel.h>
+#include <riva/kernel/drv/vga.h>
+#include <riva/api/ports.h>
 
 using namespace riva;
 

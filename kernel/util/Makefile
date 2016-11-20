@@ -4,18 +4,12 @@ ASMFLAGS=-felf32
 CXX:=i686-elf-g++
 CXXFLAGS=-c -ffreestanding -fno-exceptions -fno-rtti -O0 -Wall -Wextra -I"../../include" -I"../../librivac/include"
 
-OBJECTS=cpprts.o core.o init.o
+OBJECTS=util.o
 
 all: $(OBJECTS)
 
-cpprts.o:
-	$(CXX) $(CXXFLAGS) -o cpprts.o cpprts.cpp
-
-core.o:
-	$(CXX) $(CXXFLAGS) -o core.o core.cpp
-
-init.o:
-	$(ASM) $(ASMFLAGS) -o init.o init.asm
+util.o:
+	$(CXX) $(CXXFLAGS) -o util.o util.cpp
 
 clean:
 	-rm *.o

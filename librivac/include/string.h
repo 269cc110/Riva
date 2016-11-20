@@ -9,10 +9,10 @@ extern "C"
 {
 #endif
 
-void *memset(void *ptr, uint8_t val, size_t len);
-void *memsetw(void *ptr, uint16_t val, size_t len);
+void memset(void *ptr, int val, size_t len);
+void memsetw(void *ptr, int val, size_t len);
 
-void *memcpy(void *dest, const void *src, size_t len);
+void memcpy(void *dest, const void *src, size_t len);
 
 size_t strlen(const char *str);
 

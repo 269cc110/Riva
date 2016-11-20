@@ -9,13 +9,13 @@ LDFLAGS=-T linker.ld -o rivak.bin -ffreestanding -O0 -nostdlib -L librivac/ -l r
 
 CRTBEGIN:=$(shell $(CXX) $(CXXFLAGS) -print-file-name=crtbegin.o)
 CRTEND:=$(shell $(CXX) $(CXXFLAGS) -print-file-name=crtend.o)
-CRTI:=crt/crti.o
-CRTN:=crt/crtn.o
+CRTI:=rt/crti.o
+CRTN:=rt/crtn.o
 
-OBJECTS_CORE=kernel/core/core.o kernel/core/cpprts.o
+OBJECTS_CORE=kernel/core/init.o kernel/core/core.o kernel/core/cpprts.o
 OBJECTS_DRV=kernel/drv/vga.o
 OBJECTS_API=kernel/api/ports.o
-OBJECTS_LRC=librivac/string.o
+OBJECTS_LRC=librivac/string.o librivac/alloc.o librivac/strconv.o librivac/strutil.o
 OBJECTS_ALL=kernel/boot.o $(OBJECTS) $(OBJECTS_CORE) $(OBJECTS_LRC) $(OBJECTS_DRV) $(OBJECTS_API)
 
 all: iso
@@ -23,7 +23,7 @@ all: iso
 sub:
 	cd librivac/ && $(MAKE)
 	cd kernel/ && $(MAKE)
-	cd crt/ && $(MAKE)
+	cd rt/ && $(MAKE)
 
 kernel: sub
 	$(LD) $(LDFLAGS) $(CRTI) $(CRTBEGIN) $(OBJECTS_ALL) $(CRTEND) $(CRTN)
@@ -38,5 +38,5 @@ iso: kernel
 clean:
 	-rm -r *.bin *.iso iso/
 	cd kernel/ && $(MAKE) clean
-	cd crt/ && $(MAKE) clean
+	cd rt/ && $(MAKE) clean
 	cd librivac/ && $(MAKE) clean

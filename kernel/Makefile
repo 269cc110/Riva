@@ -15,9 +15,11 @@ sub:
 	cd drv/ && $(MAKE)
 	cd api/ && $(MAKE)
 	cd core/ && $(MAKE)
+#	cd util/ && $(MAKE)
 
 clean:
 	-rm *.o
 	cd drv/ && $(MAKE) clean
 	cd api/ && $(MAKE) clean
 	cd core/ && $(MAKE) clean
+#	cd util/ && $(MAKE) clean

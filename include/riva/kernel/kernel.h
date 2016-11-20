@@ -8,7 +8,7 @@ namespace riva
 		public:
 			static void init();
 			static void start();
-			static void fatal(const char *error);
+			static void __attribute__((noreturn)) fatal(const char *error);
 	};
 }
 
