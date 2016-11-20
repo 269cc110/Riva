@@ -77,6 +77,6 @@ void to_hex32(char *buffer, uint32_t i)
 
 void to_hex64(char *buffer, uint64_t i)
 {
-	to_hex64(buffer, (uint32_t)((i >> 32) & 0xFFFFFFFF));
-	to_hex64(buffer + 8, (uint32_t)(i & 0xFFFFFFFF));
+	to_hex32(buffer, (uint32_t)((i >> 32) & 0xFFFFFFFF));
+	to_hex32(buffer + 8, (uint32_t)(i & 0xFFFFFFFF));
 }
