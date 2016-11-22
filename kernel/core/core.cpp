@@ -19,7 +19,7 @@ extern "C"
 		kernel::start();
 	}
 
-	extern uint32_t end_kernel, stack_bottom, stack_top;
+	extern uint8_t end_kernel, stack_bottom, stack_top;
 
 	void _init_page_dir(uint32_t *pd);
 	void _enable_paging();
@@ -64,7 +64,7 @@ void kernel::start()
 	vga::putstr(sizeof(void *) == 4 ? "x86, " : "x64, ");
 //	vga::putstr(&stack_top < &stack_bottom ? "stack_top < stack_bottom, " : (&stack_top == &stack_bottom ? "stack_top = stack_bottom, " : "stack_top > stack_bottom, "));
 
-	size_t stack_size = (&stack_top - &stack_bottom) * 4;
+	size_t stack_size = &stack_top - &stack_bottom;
 
 	vga::putstr(stack_size == 32768 ? "stack OK, " : "incorrectly sized stack, ");
 
