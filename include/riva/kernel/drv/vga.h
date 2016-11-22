@@ -53,3 +53,4 @@ namespace riva
 }
 
 #endif // __RIVA_VGA_H_
+

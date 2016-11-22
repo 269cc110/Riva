@@ -3,6 +3,14 @@
 
 namespace riva
 {
+	struct registers
+	{
+		uint32_t gs, fs, es, ds;
+		uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
+		uint32_t interrupt, error;
+		uint32_t eip, cs, eflags, useresp, ss;
+	}
+
 	class kernel
 	{
 		public:
@@ -13,3 +21,4 @@ namespace riva
 }
 
 #endif // __RIVA_KERNEL_H_
+

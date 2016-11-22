@@ -1,6 +1,6 @@
 %macro IRQ 2
-global __irq%1
-__irq%1:
+global _irq%1:function
+_irq%1:
 	cli
 	push byte 0
 	push byte %2
@@ -49,3 +49,4 @@ irq_common_stub:
 	popa
 	add esp, 8
 	iret
+

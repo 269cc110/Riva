@@ -99,3 +99,4 @@ void vga::update_cursor()
 	outportb(0x3D4, 15);
 	outportb(0x3D5, cp & 0xFF);
 }
+

@@ -13,7 +13,7 @@ CRTEND:=$(shell $(CXX) $(CXXFLAGS) -print-file-name=crtend.o)
 CRTI:=rt/crti.o
 CRTN:=rt/crtn.o
 
-OBJECTS_CORE=kernel/core/init.o kernel/core/core.o kernel/core/cpprts.o
+OBJECTS_CORE=kernel/core/init.o kernel/core/core.o kernel/core/cpprts.o kernel/core/dt.o kernel/core/gdt.o
 OBJECTS_DRV=kernel/drv/vga.o
 OBJECTS_API=kernel/api/ports.o
 #OBJECTS_LRC=librivac/string.o librivac/alloc.o librivac/strconv.o librivac/strutil.o
@@ -42,3 +42,4 @@ clean:
 	cd kernel/ && $(MAKE) clean
 	cd rt/ && $(MAKE) clean
 	cd librivac/ && $(MAKE) clean
+

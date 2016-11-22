@@ -42,3 +42,4 @@ void util::to_hex(char *buffer, uint64_t i)
 	to_hex(buffer, (uint32_t)((i >> 32) & 0xFFFFFFFF));
 	to_hex(buffer + 8, (uint32_t)(i & 0xFFFFFFFF));
 }
+

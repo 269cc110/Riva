@@ -13,3 +13,4 @@ vga.o:
 
 clean:
 	-rm *.o
+

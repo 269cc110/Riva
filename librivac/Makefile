@@ -28,3 +28,4 @@ archive: $(OBJECTS)
 
 clean:
 	-rm *.o *.a
+

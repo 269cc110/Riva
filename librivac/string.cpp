@@ -23,3 +23,4 @@ void memset(void *ptr, int val, size_t len)
 		charptr[i] = (char)(val & 0xFF);
 	}
 }
+

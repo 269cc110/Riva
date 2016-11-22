@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include <riva/kernel/kernel.h>
+#include <riva/kernel/dt.h>
 #include <riva/kernel/drv/vga.h>
 
 #include <lrcinternal/alloc.h>
@@ -25,7 +26,7 @@ extern "C"
 	void _enable_paging();
 }
 
-const char *VERSION = "0.1";
+const char *VERSION = "0.2";
 
 uint32_t page_directory[1024] __attribute__((aligned(4096)));
 
@@ -52,7 +53,11 @@ void kernel::init()
 	_init_page_dir(page_directory);
 	_enable_paging();
 
+	descriptor_tables::init_gdt();
+
 	alloc_init((void *)&end_kernel, (32768 * 1024));// - (uint32_t)&end_kernel);
+
+	descriptor_tables::init_idt();
 }
 
 void kernel::start()
@@ -103,3 +108,4 @@ void kernel::fatal(const char *error)
 	// just in case
 	while(true);
 }
+
