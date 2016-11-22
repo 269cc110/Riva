@@ -29,6 +29,7 @@ _start:
 	extern _init
 	call _init
 
+	cli
 	extern kernel_main
 	call kernel_main
 

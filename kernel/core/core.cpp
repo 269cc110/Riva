@@ -31,6 +31,10 @@ uint32_t page_directory[1024] __attribute__((aligned(4096)));
 
 void kernel::init()
 {
+	vga::init();
+	vga::set_colour(VGA_GREEN, VGA_BLACK);
+	vga::clear();
+
 	for(int i = 0; i < 1024; i++)
 	{
 		page_directory[i] = 0x00000002;
@@ -48,11 +52,7 @@ void kernel::init()
 	_init_page_dir(page_directory);
 	_enable_paging();
 
-	alloc_init((void *)&end_kernel, (32768 * 1024) - (uint32_t)&end_kernel);
-
-	vga::init();
-	vga::set_colour(VGA_GREEN, VGA_BLACK);
-	vga::clear();
+	alloc_init((void *)&end_kernel, (32768 * 1024));// - (uint32_t)&end_kernel);
 }
 
 void kernel::start()
@@ -66,7 +66,7 @@ void kernel::start()
 
 	size_t stack_size = &stack_top - &stack_bottom;
 
-//	vga::putstr(stack_size == 0 ? "stack OK, " : "incorrectly sized stack, ");
+	vga::putstr(stack_size == 8192 ? "stack OK, " : "incorrectly sized stack, ");
 
 	char buffer[9] = {0};
 
@@ -77,7 +77,7 @@ void kernel::start()
 
 	vga::putstr("0x");
 	vga::putstr(buffer);
-	vga::putstr(" byte stack");
+	vga::putstr(" bytes");
 
 	vga::putstr(")\n");
 
@@ -85,14 +85,6 @@ void kernel::start()
 	to_hex32(buffer, (uint32_t)&end_kernel);
 	vga::putstr(buffer);
 	vga::putstr("\n> ");
-
-/*	to_hex8(buffer, 1);
-	vga::putstr(buffer);
-	vga::putch('\n');
-
-	to_hex32(buffer, 464623);
-	vga::putstr(buffer);
-	vga::putch('\n');*/
 }
 
 __attribute__((noreturn))
