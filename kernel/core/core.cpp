@@ -64,9 +64,9 @@ void kernel::start()
 	vga::putstr(sizeof(void *) == 4 ? "x86, " : "x64, ");
 //	vga::putstr(&stack_top < &stack_bottom ? "stack_top < stack_bottom, " : (&stack_top == &stack_bottom ? "stack_top = stack_bottom, " : "stack_top > stack_bottom, "));
 
-	size_t stack_size = &stack_top - &stack_bottom;
+	size_t stack_size = (&stack_top - &stack_bottom) * 4;
 
-	vga::putstr(stack_size == 8192 ? "stack OK, " : "incorrectly sized stack, ");
+	vga::putstr(stack_size == 32768 ? "stack OK, " : "incorrectly sized stack, ");
 
 	char buffer[9] = {0};
 
