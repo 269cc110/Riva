@@ -8,6 +8,7 @@
 #include <riva/kernel/interrupts.h>
 
 #include <riva/kernel/drv/vga.h>
+#include <riva/kernel/drv/kb.h>
 
 #include <lrcinternal/alloc.h>
 #include <lrcext/strconv.h>
@@ -31,6 +32,11 @@ extern "C"
 const char *VERSION = "0.2";
 
 uint32_t page_directory[1024] __attribute__((aligned(4096)));
+
+int trigger_bluescreen()
+{
+	return 1 / 0;
+}
 
 void kernel::init()
 {
@@ -62,10 +68,16 @@ void kernel::init()
 	descriptor_tables::init_idt();
 
 	interrupts::init_interrupts();
+
+//	trigger_bluescreen();
+
+	keyboard::init();
 }
 
 void kernel::start()
 {
+	asm volatile("sti");
+
 	vga::putstr("Riva ");
 	vga::putstr(VERSION);
 	vga::putstr(" (");
@@ -94,6 +106,8 @@ void kernel::start()
 	to_hex32(buffer, (uint32_t)&end_kernel);
 	vga::putstr(buffer);
 	vga::putstr("\n> ");
+
+	keyboard::enable();
 }
 
 __attribute__((noreturn))

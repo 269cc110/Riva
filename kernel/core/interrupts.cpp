@@ -6,6 +6,9 @@
 #include <riva/kernel/kernel.h>
 #include <riva/kernel/interrupts.h>
 
+#include <lrcext/strconv.h>
+#include <riva/kernel/drv/vga.h>
+
 using namespace riva;
 
 extern "C"
@@ -74,6 +77,15 @@ irq_handler_t interrupts::irq_handlers[16] = {0};
 
 void interrupts::irq_set_handler(uint32_t irq, irq_handler_t handler)
 {
+	char buffer[9] = {0};
+	to_hex32(buffer, irq);
+	vga::putstr("set IRQ handler 0x");
+	vga::putstr(buffer);
+	to_hex32(buffer, (uint32_t)handler);
+	vga::putstr(" to 0x");
+	vga::putstr(buffer);
+	vga::putstr("\n");
+
 	irq_handlers[irq] = handler;
 }
 
@@ -98,8 +110,6 @@ void interrupts::irq_remap()
 
 void interrupts::init_interrupts()
 {
-	irq_remap();
-
 #define GATE(a) descriptor_tables::idt_set_gate(a, (uint32_t)_isr##a, 0x08, 0x8E);
 
 	// ISRs
@@ -138,6 +148,8 @@ void interrupts::init_interrupts()
 
 #define GATE(a, b) descriptor_tables::idt_set_gate(a, (uint32_t)_irq##b, 0x08, 0x8E);
 
+	irq_remap();
+
 	// IRQs
 	GATE(32, 0)
 	GATE(33, 1)
@@ -163,7 +175,7 @@ const char *interrupts::uc_exception_messages[] =
 {
 	"DIVISION BY ZERO",
 	"DEBUG",
-	"NON MASKABE INTERRUPT",
+	"NON-MASKABLE INTERRUPT",
 	"BREAKPOINT",
 	"INTO DETECTED OVERFLOW",
 	"OUT OF BOUNDS",
@@ -200,6 +212,13 @@ extern "C"
 	void _irq_handler(registers *reg)
 	{
 		irq_handler_t handler;
+
+		char buffer[9] = {0};
+		to_hex32(buffer, reg->interrupt - 32);
+
+		vga::putstr("received IRQ 0x");
+		vga::putstr(buffer);
+		vga::putstr("\n");
 
 		if((handler = interrupts::irq_handlers[reg->interrupt - 32])) handler(reg);
 

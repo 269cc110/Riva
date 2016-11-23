@@ -15,6 +15,7 @@ void vga::init()
 {
 	buffer = (uint16_t *)0xB8000;
 	set_colour(VGA_LIGHT_GREY, VGA_BLACK);
+	update_cursor();
 }
 
 size_t vga::index(size_t x, size_t y)
