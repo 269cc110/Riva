@@ -4,7 +4,7 @@ ASMFLAGS=-felf32
 CXX:=i686-elf-g++
 CXXFLAGS=-c -masm=intel -ffreestanding -fno-exceptions -fno-rtti -O0 -Wall -Wextra -I"../../include" -I"../../librivac/include"
 
-OBJECTS=cpprts.o core.o init.o dt.o gdt.o irq.asm isr.asm
+OBJECTS=cpprts.o core.o init.o dt.o gdt.o irq.o isr.o interrupts.o
 
 all: $(OBJECTS)
 
@@ -28,6 +28,9 @@ irq.o:
 
 isr.o:
 	$(ASM) $(ASMFLAGS) -o isr.o isr.asm
+
+interrupts.o:
+	$(CXX) $(CXXFLAGS) -o interrupts.o interrupts.cpp
 
 clean:
 	-rm *.o

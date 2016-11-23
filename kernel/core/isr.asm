@@ -1,14 +1,14 @@
 %macro ISR_NEC 1
-global __isr%1
-__isr%1:
+global _isr%1
+_isr%1:
 	push byte 0
 	push byte %1
 	jmp isr_common_stub
 %endmacro
 
 %macro ISR_EC 1
-global __isr%1
-__isr%1:
+global _isr%1
+_isr%1:
 	push byte 0
 	jmp isr_common_stub
 %endmacro
@@ -46,7 +46,7 @@ ISR_NEC 29
 ISR_NEC 30
 ISR_NEC 31
 
-extern fault_handler
+extern _fault_handler
 
 isr_common_stub:
 	pusha

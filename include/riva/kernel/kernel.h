@@ -1,6 +1,8 @@
 #ifndef __RIVA_KERNEL_H_
 #define __RIVA_KERNEL_H_
 
+#include <stdint.h>
+
 namespace riva
 {
 	struct registers
@@ -9,7 +11,7 @@ namespace riva
 		uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
 		uint32_t interrupt, error;
 		uint32_t eip, cs, eflags, useresp, ss;
-	}
+	};
 
 	class kernel
 	{
