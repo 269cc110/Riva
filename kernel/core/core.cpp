@@ -5,6 +5,8 @@
 
 #include <riva/kernel/kernel.h>
 #include <riva/kernel/dt.h>
+#include <riva/kernel/interrupts.h>
+
 #include <riva/kernel/drv/vga.h>
 
 #include <lrcinternal/alloc.h>
@@ -58,6 +60,8 @@ void kernel::init()
 	alloc_init((void *)&end_kernel, (32768 * 1024));// - (uint32_t)&end_kernel);
 
 	descriptor_tables::init_idt();
+
+	interrupts::init_interrupts();
 }
 
 void kernel::start()
