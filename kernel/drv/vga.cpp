@@ -15,7 +15,12 @@ void vga::init()
 {
 	buffer = (uint16_t *)0xB8000;
 	set_colour(VGA_LIGHT_GREY, VGA_BLACK);
-	update_cursor();
+
+	// enable cursor (unset bit 32)
+	outportb(0x3D4, 0xA);
+	uint8_t csl = inportb(0x3D5);
+	//outportb(0x3D4, 0xA);
+	outportb(0x3D5, csl & ~0x20);
 }
 
 size_t vga::index(size_t x, size_t y)
@@ -95,9 +100,9 @@ void vga::update_cursor()
 {
 	size_t cp = index(x, y);
 
-	outportb(0x3D4, 14);
+	outportb(0x3D4, 0xE);
 	outportb(0x3D5, (cp >> 8) & 0xFF);
-	outportb(0x3D4, 15);
+	outportb(0x3D4, 0xF);
 	outportb(0x3D5, cp & 0xFF);
 }
 
