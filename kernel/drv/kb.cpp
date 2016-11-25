@@ -18,7 +18,7 @@ extern "C"
 {
 	void kb_handler(registers *reg)
 	{
-		vga::putstr("received keyboard interrupt\n");
+		//vga::putstr("received keyboard interrupt\n");
 
 		uint8_t scancode = inportb(0x60);
 

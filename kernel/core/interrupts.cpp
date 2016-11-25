@@ -215,12 +215,12 @@ extern "C"
 	{
 		irq_handler_t handler;
 
-		char buffer[9] = {0};
+		/*char buffer[9] = {0};
 		to_hex32(buffer, reg->interrupt - 32);
 
 		vga::putstr("received IRQ 0x");
 		vga::putstr(buffer);
-		vga::putstr("\n");
+		vga::putstr("\n");*/
 
 		if((handler = interrupts::irq_handlers[reg->interrupt - 32])) handler(reg);
 

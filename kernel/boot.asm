@@ -23,7 +23,7 @@ _start:
 	extern _fini
 	call _fini
 
-	cli
+	;cli
 .hang:	hlt
 	jmp .hang
 
