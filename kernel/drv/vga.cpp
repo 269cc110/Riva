@@ -50,12 +50,17 @@ void vga::set(char c, uint8_t colour, size_t x, size_t y)
 
 void vga::putch(char c)
 {
+	if(!c) return;
+
 	switch(c)
 	{
 		case '\n':
 			y++;
 		case '\r':
 			x = 0;
+			break;
+		case '\t':
+			x = (x + 4) & ~3;
 			break;
 		default:
 			set(c, colour, x, y);

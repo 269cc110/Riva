@@ -22,14 +22,14 @@ void alloc_init(void *start, size_t lim)
 
 	to_hex32(buffer, (uint32_t)start);
 
-	vga::putstr("alloc_init 0x");
+	vga::putstr("alloc_init(0x");
 	vga::putstr(buffer);
-	vga::putstr(" 0x");
+	vga::putstr(", 0x");
 
 	to_hex32(buffer, lim);
 
 	vga::putstr(buffer);
-	vga::putstr("\n");
+	vga::putstr(")\n");
 }
 
 // the simplest malloc implementation ever don't judge me

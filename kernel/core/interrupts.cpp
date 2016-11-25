@@ -79,12 +79,12 @@ void interrupts::irq_set_handler(uint32_t irq, irq_handler_t handler)
 {
 	char buffer[9] = {0};
 	to_hex32(buffer, irq);
-	vga::putstr("set IRQ handler 0x");
+	vga::putstr("irq_set_handler(0x");
 	vga::putstr(buffer);
 	to_hex32(buffer, (uint32_t)handler);
-	vga::putstr(" to 0x");
+	vga::putstr(", 0x");
 	vga::putstr(buffer);
-	vga::putstr("\n");
+	vga::putstr(")\n");
 
 	irq_handlers[irq] = handler;
 }
